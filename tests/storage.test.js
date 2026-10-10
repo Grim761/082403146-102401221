@@ -31,6 +31,7 @@ test('损坏记录：保留原始内容，给出临时模式提示', async () =>
   const storage = memory(); storage.setItem(KEY, '{broken'); const { store } = setup(storage);
   assert.equal(store.persistent, false); assert.equal(storage.getItem(KEY), '{broken');
   assert.ok(store.notice.includes('原数据没有覆盖')); assert.equal((await store.list()).length, seed.length);
+  assert.equal(JSON.parse(store.exportData()).recoveryOriginalRaw, '{broken');
 });
 test('浏览器禁用存储：仍可运行，并明确临时模式', async () => {
   const { store } = setup({ getItem() { throw new Error('SecurityError'); }, setItem() { throw new Error('SecurityError'); } });

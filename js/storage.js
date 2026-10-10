@@ -15,15 +15,18 @@
     let state = { version: 1, owner: { id: idFactory(), name: '本机发布者' }, posts: copy(seed) };
     let persistent = !!storage;
     let notice = '';
+    let recoveryOriginalRaw = null;
     try {
       const raw = storage?.getItem(KEY);
       if (raw) {
+        recoveryOriginalRaw = raw;
         const saved = JSON.parse(raw);
         if (saved.version !== 1 || !saved.owner?.id || typeof saved.owner.name !== 'string'
           || !Array.isArray(saved.posts) || saved.posts.length > 500 || !saved.posts.every(Core.validStoredPost)) {
           throw new Error('INVALID_STORE');
         }
         state = saved;
+        recoveryOriginalRaw = null;
       } else if (storage) storage.setItem(KEY, JSON.stringify(state));
     } catch (error) {
       persistent = false;
@@ -63,7 +66,8 @@
         commit({ ...copy(state), posts: state.posts.map(item => item.id === id ? nextPost : copy(item)) });
         return copy(nextPost);
       },
-      exportData() { return JSON.stringify({ ...copy(state), exportedAt: new Date(clock()).toISOString() }, null, 2); },
+      exportData() { return JSON.stringify({ ...copy(state), exportedAt: new Date(clock()).toISOString(),
+        ...(recoveryOriginalRaw !== null ? { recoveryOriginalRaw } : {}) }, null, 2); },
       readDraft() {
         try { const value = JSON.parse(storage?.getItem(DRAFT_KEY) || 'null'); return value && typeof value === 'object' ? value : null; }
         catch (_) { return null; }
