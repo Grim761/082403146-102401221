@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="拾见校园：发布寻物与招领，按地点和时间核对线索，让每件失物找到归处。">
+  <meta name="theme-color" content="#193443">
+  <title>拾见校园 · 校园线索墙</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/core.js" defer></script>
+  <script src="js/seed.js" defer></script>
+  <script src="js/storage.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <div class="site">
+    <header class="site-header">
+      <a class="brand" href="#board" aria-label="拾见校园首页"><span class="brand-mark">拾</span><span>拾见校园<small>校园失物招领</small></span></a>
+      <nav class="main-nav" aria-label="主要导航">
+        <a href="#board" data-nav="board">线索墙</a>
+        <a href="#publish" data-nav="publish">发布线索</a>
+        <a href="#mine" data-nav="mine">我的发布</a>
+      </nav>
+      <div class="header-actions"><span id="mode-tag" class="mode-tag">正在载入</span><button id="identity-button" class="quiet-button" type="button">发布身份</button></div>
+    </header>
+    <div id="storage-notice" class="notice" role="status" hidden></div>
+    <main id="main-content" tabindex="-1"><div class="loading"><span class="loading-mark">拾</span><p>正在整理线索…</p></div></main>
+    <footer class="site-footer"><span>一条线索，一个归处。</span><div><button type="button" data-action="help">使用指南</button><button id="export-button" type="button" data-action="export" hidden>导出本机备份</button><a href="https://github.com/Grim761/shijian-campus" target="_blank" rel="noopener">项目仓库 ↗</a></div></footer>
+  </div>
+  <dialog id="modal" aria-labelledby="modal-title"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="notice">需要启用 JavaScript 才能发布和查找线索。</p></noscript>
+</body>
+</html>
