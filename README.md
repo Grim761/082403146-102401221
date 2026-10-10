@@ -4,7 +4,7 @@
 
 把寻物、招领消息做成一张张“校园线索卡”：先看时间和地点，再核对物品特征，最后由发布者更新结果。
 
-- [在线体验（本机保存模式）](https://grim761.github.io/shijian-campus/)
+- [在线体验（本机保存模式）](https://grim761.github.io/082403146-102401221/)
 - [作业要求](https://edu.cnblogs.com/campus/fzu/2026-01SoftwareEngineeringandSoftwareEngineeringPractice/homework/16745)
 - [此前的交互原型](https://grim761.github.io/campus-lost-found-prototype/)
 - [测试报告](docs/测试报告.md) · [开发计划](docs/开发计划.md) · [协作与提交说明](docs/协作与提交说明.md)
@@ -42,8 +42,8 @@
 需要 **Node.js 22 或更新版本**。本项目没有第三方 npm 依赖，无需运行 `npm install`。
 
 ```bash
-git clone https://github.com/Grim761/shijian-campus.git
-cd shijian-campus
+git clone https://github.com/Grim761/082403146-102401221.git
+cd 082403146-102401221
 npm start
 ```
 
@@ -72,7 +72,7 @@ node server/server.js
 ## 4. 文件结构
 
 ```text
-shijian-campus/
+082403146-102401221/
 ├── index.html                # 页面入口，经典脚本按依赖顺序加载
 ├── css/style.css             # 纸色线索卡布局，含移动端断点
 ├── js/

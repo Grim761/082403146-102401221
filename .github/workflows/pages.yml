@@ -30,7 +30,7 @@ jobs:
         with:
           path: _site
   deploy:
-    if: github.repository == 'Grim761/shijian-campus'
+    if: github.repository == 'Grim761/082403146-102401221'
     needs: build
     runs-on: ubuntu-latest
     permissions:
