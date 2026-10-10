@@ -110,7 +110,7 @@ shijian-campus/
 ```bash
 npm test
 # 查看 Node 测试加载模块的覆盖报告
-node --test --experimental-test-coverage tests/*.test.js
+node --test --experimental-test-coverage tests/core.test.js tests/storage.test.js tests/server.test.js
 ```
 
 使用 Node 内置 `node:test` 和 `node:assert/strict`，测试不启动固定端口，不改动正在运行的数据。接口测试监听临时端口并使用系统临时目录。
