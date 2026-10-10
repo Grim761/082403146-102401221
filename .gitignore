@@ -1,0 +1,9 @@
+node_modules/
+data/
+coverage/
+*.log
+*.zip
+.DS_Store
+docs/blog/
+docs/private/
+
