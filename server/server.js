@@ -11,7 +11,7 @@ const ROOT = path.resolve(__dirname, '..');
 const STATIC = new Map([
   ['/', ['index.html', 'text/html; charset=utf-8']], ['/index.html', ['index.html', 'text/html; charset=utf-8']],
   ['/css/style.css', ['css/style.css', 'text/css; charset=utf-8']],
-  ...['core', 'seed', 'storage', 'api', 'app'].map(name => [`/js/${name}.js`, [`js/${name}.js`, 'text/javascript; charset=utf-8']])
+  ...['core', 'seed', 'storage', 'api', 'illustrations', 'app'].map(name => [`/js/${name}.js`, [`js/${name}.js`, 'text/javascript; charset=utf-8']])
 ]);
 const SESSION_LIFE = 7 * 24 * 60 * 60 * 1000;
 function publicUser(user) { return user ? { id: user.id, name: user.name, username: user.username } : null; }

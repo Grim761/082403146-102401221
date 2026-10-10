@@ -5,7 +5,7 @@
   const main = document.getElementById('main-content');
   const modal = document.getElementById('modal');
   const toastBox = document.getElementById('toast');
-  const icons = { '证件卡片': '证', '钥匙': '钥', '电子产品': '电', '生活用品': '物', '其他': '拾' };
+  const illustrations = window.ShijianIllustrations;
   const state = {
     api: null, user: null, posts: [], filters: { query: '', kind: 'all', category: 'all', zone: 'all', status: 'open', sort: 'created' },
     mineStatus: 'all', routeVersion: 0, publishing: false, photoLoading: false, photoVersion: 0, photo: '', authMode: 'login', pendingPublish: false, skipDraftSave: false
@@ -30,7 +30,7 @@
   function card(post, preview = false) {
     const picture = post.photo && C.validPhoto(post.photo)
       ? `<img class="card-thumb" src="${e(post.photo)}" alt="${e(post.title)}的图片">`
-      : `<span class="category-symbol" aria-hidden="true">${icons[post.category] || '拾'}</span>`;
+      : illustrations.render(post);
     const serial = post.id === 'preview' ? '待发布' : String(post.id).replace(/[^a-z0-9]/gi, '').slice(-6).toUpperCase();
     const content = `<div class="card-top"><span class="serial">线索 · ${e(serial)}</span><span class="type-badge">${e(C.statusLabel(post))}</span></div>
       <div class="card-body">${picture}<div><h3 class="clue-title">${e(post.title || '物品名称会出现在这里')}</h3><div class="category-name">${e(post.category || '物品类别')} · ${e(C.KIND_LABELS[post.kind] || '寻物')}</div></div></div>
@@ -72,7 +72,7 @@
     const done = post.status === 'resolved';
     main.innerHTML = `<a class="back-link" href="#board">← 返回线索墙</a><div class="detail-layout"><article class="detail-main ${post.kind}"><span class="eyebrow">${e(C.KIND_LABELS[post.kind])}线索 · ${e(C.statusLabel(post))}</span>
       <h1>${e(post.title)}</h1><p class="detail-meta">${e(post.ownerName)} 发布于 ${e(date(post.createdAt))}${post.demo ? ' · 示例数据' : ''}</p>
-      <div class="detail-art">${post.photo && C.validPhoto(post.photo) ? `<img src="${e(post.photo)}" alt="${e(post.title)}的图片">` : `<span class="category-symbol" aria-hidden="true">${icons[post.category]}</span>`}</div>
+      <div class="detail-art${post.photo && C.validPhoto(post.photo) ? ' has-photo' : ''}">${post.photo && C.validPhoto(post.photo) ? `<img src="${e(post.photo)}" alt="${e(post.title)}的图片">` : `${illustrations.render(post)}<span class="illustration-caption">物品示意图 · 请核对文字描述</span>`}</div>
       <div class="detail-description"><h3>线索描述</h3><p>${e(post.description || '发布者没有补充描述。联系时可以先核对物品特征。')}</p></div>${post.demo ? '<p class="privacy-note">这是一条体验用的示例，请勿按示例信息寻找真实物品。</p>' : ''}</article>
       <aside class="detail-side"><section class="panel"><h2>先核对这些信息</h2><dl class="facts"><div><dt>物品类别</dt><dd>${e(post.category)}</dd></div><div><dt>发生时间</dt><dd>${e(date(post.eventAt))}</dd></div><div><dt>所在区域</dt><dd>${e(post.zone)}</dd></div><div><dt>具体地点</dt><dd>${e(post.place)}</dd></div><div><dt>当前状态</dt><dd>${e(C.statusLabel(post))}</dd></div></dl></section>
       <section class="panel"><h2>${done ? '这条线索已有归处' : '联系与领取'}</h2>${done ? `<p class="privacy-note resolved-note">发布者已标记“${e(C.statusLabel(post))}”。为减少后续打扰，本页收起了联系方式。</p><p class="modal-copy">状态更新于 ${e(date(post.updatedAt))}</p>` : `<p class="contact-text" id="contact-text">${e(post.contact)}</p><button class="button wide" type="button" data-action="copy-contact" data-id="${e(post.id)}">复制联系方式 / 领取信息</button><p class="privacy-note">请核对独有特征后领取。身份证号、银行卡号等敏感信息不宜写在公开描述中。</p>`}
