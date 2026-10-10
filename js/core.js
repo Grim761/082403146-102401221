@@ -41,7 +41,7 @@
     else value.eventAt = new Date(time).toISOString();
     if (value.description.length > 600) errors.description = '补充描述最多 600 个字符。';
     if (value.contact.length < 2 || value.contact.length > 120) errors.contact = '联系方式或领取地点需要 2—120 个字符。';
-    if (!validPhoto(value.photo)) errors.photo = '图片仅支持 JPEG、PNG、WebP，压缩后不能超过 260 KB。';
+    if (!validPhoto(value.photo)) errors.photo = '图片仅支持 JPEG、PNG、WebP，请缩小图片后再试。';
     return { valid: Object.keys(errors).length === 0, errors, value };
   }
   function createPost(input, owner, { now = Date.now(), id = '' } = {}) {

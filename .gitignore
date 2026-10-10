@@ -1,9 +1,9 @@
 node_modules/
 data/
 coverage/
+_site/
 *.log
 *.zip
 .DS_Store
 docs/blog/
 docs/private/
-
