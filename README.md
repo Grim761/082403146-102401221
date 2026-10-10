@@ -87,6 +87,7 @@ node server/server.js
 ├── tests/
 │   ├── core.test.js          # 18 项业务单元测试
 │   ├── storage.test.js       # 9 项本机存储单元测试
+│   ├── store.test.js         # 2 项服务端文件存储回归测试
 │   └── server.test.js        # 14 项接口与集成测试
 ├── docs/                     # 计划、报告、图示和操作截图
 ├── tools/draw_diagrams.py    # 图示生成源文件（运行需 Pillow）
@@ -111,12 +112,12 @@ node server/server.js
 ```bash
 npm test
 # 查看 Node 测试加载模块的覆盖报告
-node --test --experimental-test-coverage tests/core.test.js tests/storage.test.js tests/server.test.js
+node --test --experimental-test-coverage tests/core.test.js tests/storage.test.js tests/store.test.js tests/server.test.js
 ```
 
 使用 Node 内置 `node:test` 和 `node:assert/strict`，测试不启动固定端口，不改动正在运行的数据。接口测试监听临时端口并使用系统临时目录。
 
-2026-10-10 本地 Node v24.19.0 结果：**41 项通过、0 项失败**；其中 27 项是单元测试，14 项是接口与集成测试。覆盖率和白盒用例见[测试报告](docs/测试报告.md)。覆盖统计不含 DOM 页面交互脚本，不能替代浏览器走查。
+2026-10-10 本地 Node v24.16.0 结果：**43 项通过、0 项失败**；其中 29 项是单元测试，14 项是接口与集成测试。新增文件存储测试检查损坏数据不被覆盖，以及事务失败后可继续保存。完整 ZIP 解压后使用 Chrome 直接打开 HTML，检查了本机搜索、发布、刷新和完成状态；共享服务在两个独立 Chrome 配置中检查了 A 发布、B 查看、仅 A 可更新。截图、覆盖率和白盒用例见[测试报告](docs/测试报告.md)。覆盖统计不含 DOM 页面交互脚本，不能替代浏览器走查。
 
 ## 7. 当前范围
 
